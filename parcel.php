@@ -96,22 +96,29 @@ if ($_GET['length'] == 0) {
     </head>
     <body>
         <div class="container">
-            <h1>Your parcel:</h1>
-            <ul>
-                <?php
-                    if (!$isParcel) {
-                        echo $error;
-                    } else {
-                        echo "<li>Length: " . $your_parcel->getLength() . "</li>";
-                        echo "<li>Width: " . $your_parcel->getWidth() . "</li>";
-                        echo "<li>Height: " . $your_parcel->getHeight() . "</li>";
-                        echo "<li>Weight: " . $your_parcel->getWeight() . "</li>";
-                        echo "<li><strong>Volume: " . $your_parcel->volume() .
-                            "</strong></li>";
-                        echo "<li>Total Cost: $" . $your_parcel->costToShip() . "</li>";
-                    }
-                ?>
-            </ul>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1>Your parcel:</h1>
+                    <ul>
+                        <?php
+                            if (!$isParcel) {
+                                echo $error;
+                            } else {
+                                echo "<li>Length: " . $your_parcel->getLength() . "</li>\n";
+                                echo "<li>Width: " . $your_parcel->getWidth() . "</li>\n";
+                                echo "<li>Height: " . $your_parcel->getHeight() . "</li>\n";
+                                echo "<li>Weight: " . $your_parcel->getWeight() . "</li>\n";
+                                echo "<li><strong>Volume: " . $your_parcel->volume() .
+                                    "</strong></li>\n";
+                                echo "<li>Total Cost: $" . $your_parcel->costToShip() . "</li>\n";
+                            }
+                        ?>
+                    </ul>
+                </div>
+                <div class="col-sm-6">
+                    <img class="img-responsive" src="images/box.jpg">
+                </div>
+            </div>
         </div>
     </body>
 </html>
