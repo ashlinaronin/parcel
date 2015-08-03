@@ -72,14 +72,14 @@ class Parcel
 $isParcel = false;
 $error = "";
 
-if ($_GET['length'] == 0) {
-    $error = "Please add a value for length.";
-} elseif ($_GET['width'] == 0) {
-    $error = "Please add a value for width.";
-} elseif ($_GET['height'] == 0) {
-    $error = "Please add a value for height";
-} elseif ($_GET['weight'] == 0) {
-    $error = "Please add a value for weight.";
+if (empty($_GET['length']) || is_nan($_GET['length'])) {
+    $error = "length";
+} elseif (empty($_GET['width']) || is_nan($_GET['width'])) {
+    $error = "width";
+} elseif (empty($_GET['height']) || is_nan($_GET['height'])) {
+    $error = "height";
+} elseif (empty($_GET['weight']) || is_nan($_GET['weight'])) {
+    $error = "weight";
 } else {
     $your_parcel = new Parcel($_GET['length'], $_GET['width'],
         $_GET['height'], $_GET['weight']);
@@ -102,7 +102,7 @@ if ($_GET['length'] == 0) {
                     <ul>
                         <?php
                             if (!$isParcel) {
-                                echo $error;
+                                echo "<h3>Please add a numerical value for " . $error . ".</h3>";
                             } else {
                                 echo "<li>Length: " . $your_parcel->getLength() . "</li>\n";
                                 echo "<li>Width: " . $your_parcel->getWidth() . "</li>\n";
