@@ -69,6 +69,8 @@ class Parcel
 
 }
 
+setlocale(LC_MONETARY, 'en_US'); // Adds locaation info for monetry value
+
 $isParcel = false;
 $error = "";
 
@@ -109,13 +111,14 @@ if (empty($_GET['length']) || is_nan($_GET['length'])) {
                             if (!$isParcel) {
                                 echo "<h3>Please add a numerical value for " . $error . ".</h3>";
                             } else {
+                                $dim_price = money_format('%(#10.2n', $your_parcel->costToShip());
                                 echo "<li>Length: " . $your_parcel->getLength() . "</li>\n";
                                 echo "<li>Width: " . $your_parcel->getWidth() . "</li>\n";
                                 echo "<li>Height: " . $your_parcel->getHeight() . "</li>\n";
                                 echo "<li>Weight: " . $your_parcel->getWeight() . "</li>\n";
                                 echo "<li><strong>Volume: " . $your_parcel->volume() .
                                     "</strong></li>\n";
-                                echo "<li>Total Cost: $" . $your_parcel->costToShip() . "</li>\n";
+                                echo "<li>Total Cost:" . $dim_price . "</li>\n";
                             }
                         ?>
                     </ul>
