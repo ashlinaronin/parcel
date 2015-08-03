@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <title>Submit info about your parcel</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Please enter the dimensions and weight of your parcel</h1>
+                <form  action="parcel.php" method="get">
+                <div class="form-group">
+                    <label for="length">Length:</label>
+                    <input type="number" name="length" id="length" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="width">Width:</label>
+                    <input type="number" name="width" id="width" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="height">Height:</label>
+                    <input type="number" name="height" id="height" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="weight">Weight:</label>
+                    <input type="number" name="weight" id="weight" class="form-control">
+                </div>
+                <button name="submit" class="btn btn-warning">Submit</button>
+            </form>
+        </div>
+    </body>
+</html>
