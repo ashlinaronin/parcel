@@ -93,6 +93,11 @@ if (empty($_GET['length']) || is_nan($_GET['length'])) {
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
         <title>Your Parcel</title>
+        <style media="screen">
+            .hidden {
+                display: none;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -116,7 +121,13 @@ if (empty($_GET['length']) || is_nan($_GET['length'])) {
                     </ul>
                 </div>
                 <div class="col-sm-6">
-                    <img class="img-responsive" src="images/box.jpg">
+                    <?php
+                        if (!$isParcel) {
+                        echo "<img class='img-responsive hidden' src='images/box.jpg'>";
+                    } else {
+                        echo "<img class='img-responsive' src='images/box.jpg'>";
+                    }
+                    ?>
                 </div>
             </div>
         </div>
