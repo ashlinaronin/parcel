@@ -69,11 +69,22 @@ class Parcel
 
 }
 
+$isParcel = false;
+$error = "";
 
-
-$your_parcel = new Parcel($_GET['length'], $_GET['width'],
-    $_GET['height'], $_GET['weight']);
-
+if ($_GET['length'] == 0) {
+    $error = "Please add a value for length.";
+} elseif ($_GET['width'] == 0) {
+    $error = "Please add a value for width.";
+} elseif ($_GET['height'] == 0) {
+    $error = "Please add a value for height";
+} elseif ($_GET['weight'] == 0) {
+    $error = "Please add a value for weight.";
+} else {
+    $your_parcel = new Parcel($_GET['length'], $_GET['width'],
+        $_GET['height'], $_GET['weight']);
+    $isParcel = true;
+}
 
 
 ?>
@@ -88,23 +99,17 @@ $your_parcel = new Parcel($_GET['length'], $_GET['width'],
             <h1>Your parcel:</h1>
             <ul>
                 <?php
-                if ($your_parcel->getLength() == 0) {
-                    echo "Please add a value for length.";
-                } elseif ($your_parcel->getWidth() == 0) {
-                    echo "Please add a value for width.";
-                } elseif ($your_parcel->getHeight() == 0) {
-                    echo "Please add a value for height";
-                } elseif ($your_parcel->getWeight() == 0) {
-                    echo "Please add a value for weight.";
-                } else {
-                    echo "<li>Length: " . $your_parcel->getLength() . "</li>";
-                    echo "<li>Width: " . $your_parcel->getWidth() . "</li>";
-                    echo "<li>Height: " . $your_parcel->getHeight() . "</li>";
-                    echo "<li>Weight: " . $your_parcel->getWeight() . "</li>";
-                    echo "<li><strong>Volume: " . $your_parcel->volume() .
-                        "</strong></li>";
-                    echo "<li>Total Cost: $" . $your_parcel->costToShip() . "</li>";
-                }
+                    if (!$isParcel) {
+                        echo $error;
+                    } else {
+                        echo "<li>Length: " . $your_parcel->getLength() . "</li>";
+                        echo "<li>Width: " . $your_parcel->getWidth() . "</li>";
+                        echo "<li>Height: " . $your_parcel->getHeight() . "</li>";
+                        echo "<li>Weight: " . $your_parcel->getWeight() . "</li>";
+                        echo "<li><strong>Volume: " . $your_parcel->volume() .
+                            "</strong></li>";
+                        echo "<li>Total Cost: $" . $your_parcel->costToShip() . "</li>";
+                    }
                 ?>
             </ul>
         </div>
