@@ -9,10 +9,10 @@ class Parcel
 
     function __construct($parcel_length, $parcel_width, $parcel_height, $parcel_weight)
     {
-        $this->length = $parcel_length;
-        $this->width = $parcel_width;
-        $this->height = $parcel_height;
-        $this->weight = $parcel_weight;
+        $this->length = (float) $parcel_length;
+        $this->width = (float) $parcel_width;
+        $this->height = (float) $parcel_height;
+        $this->weight = (float) $parcel_weight;
     }
 
     function setLength($new_length)
@@ -60,8 +60,16 @@ class Parcel
         return $this->length * $this->width * $this->height;
     }
 
+    function costToShip()
+    {
+        $dim_weight = $this->volume() * $this->getWeight();
+        return $dim_weight * .5;
+    }
+
 
 }
+
+
 
 $your_parcel = new Parcel($_GET['length'], $_GET['width'],
     $_GET['height'], $_GET['weight']);
@@ -76,17 +84,29 @@ $your_parcel = new Parcel($_GET['length'], $_GET['width'],
         <title>Your Parcel</title>
     </head>
     <body>
-        <h1>Your parcel:</h1>
-        <ul>
-            <?php
-                echo "<li>Length: " . $your_parcel->getLength() . "</li>";
-                echo "<li>Width: " . $your_parcel->getWidth() . "</li>";
-                echo "<li>Height: " . $your_parcel->getHeight() . "</li>";
-                echo "<li>Weight: " . $your_parcel->getWeight() . "</li>";
-                echo "<li><strong>Volume: " . $your_parcel->volume() .
-                    "</strong></li>";
-            ?>
-        </ul>
-
+        <div class="container">
+            <h1>Your parcel:</h1>
+            <ul>
+                <?php
+                if ($your_parcel->getLength() == 0) {
+                    echo "Please add a value for length.";
+                } elseif ($your_parcel->getWidth() == 0) {
+                    echo "Please add a value for width.";
+                } elseif ($your_parcel->getHeight() == 0) {
+                    echo "Please add a value for height";
+                } elseif ($your_parcel->getWeight() == 0) {
+                    echo "Please add a value for weight.";
+                } else {
+                    echo "<li>Length: " . $your_parcel->getLength() . "</li>";
+                    echo "<li>Width: " . $your_parcel->getWidth() . "</li>";
+                    echo "<li>Height: " . $your_parcel->getHeight() . "</li>";
+                    echo "<li>Weight: " . $your_parcel->getWeight() . "</li>";
+                    echo "<li><strong>Volume: " . $your_parcel->volume() .
+                        "</strong></li>";
+                    echo "<li>Total Cost: $" . $your_parcel->costToShip() . "</li>";
+                }
+                ?>
+            </ul>
+        </div>
     </body>
 </html>
