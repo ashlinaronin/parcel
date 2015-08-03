@@ -54,8 +54,39 @@ class Parcel
     {
         return $this->weight;
     }
+
+    function volume()
+    {
+        return $this->length * $this->width * $this->height;
+    }
+
+
 }
+
+$your_parcel = new Parcel($_GET['length'], $_GET['width'],
+    $_GET['height'], $_GET['weight']);
 
 
 
 ?>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <title>Your Parcel</title>
+    </head>
+    <body>
+        <h1>Your parcel:</h1>
+        <ul>
+            <?php
+                echo "<li>Length: " . $your_parcel->getLength() . "</li>";
+                echo "<li>Width: " . $your_parcel->getWidth() . "</li>";
+                echo "<li>Height: " . $your_parcel->getHeight() . "</li>";
+                echo "<li>Weight: " . $your_parcel->getWeight() . "</li>";
+                echo "<li><strong>Volume: " . $your_parcel->volume() .
+                    "</strong></li>";
+            ?>
+        </ul>
+
+    </body>
+</html>
